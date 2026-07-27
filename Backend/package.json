@@ -5,7 +5,12 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon src/server.js",
-    "start": "node src/server.js"
+    "start": "node src/server.js",
+    "db:up": "docker compose up -d",
+    "db:stop": "docker compose stop",
+    "db:start": "docker compose start",
+    "db:status": "docker compose ps",
+    "db-log": "docker logs"
   },
   "keywords": [],
   "author": "",
