@@ -1,8 +1,0 @@
-{
-  "name": "snack-diali",
-  "private": true,
-  "scripts": {
-    "backend": "npm --prefix Backend run dev",
-    "mobile": "npm --prefix Mobile start"
-  }
-}
