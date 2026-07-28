@@ -66,11 +66,11 @@ class LoginRegister {
                 },
             );
 
-            // const decode = jwt.verify(
-            //         token,
-            //         process.env.JWT_SECRET
-            // )
-            // console.log("=> DECODE TOKEN : ",decode);
+            const decode = jwt.verify(
+                    token,
+                    process.env.JWT_SECRET
+            )
+            console.log("=> DECODE TOKEN : ",decode);
 
             const refreshToken = jwt.sign(
                 {
