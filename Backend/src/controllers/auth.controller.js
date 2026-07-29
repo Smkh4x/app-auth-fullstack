@@ -102,9 +102,16 @@ class LoginRegister {
     getMe = async (req, res) => {
 
         try {
-            const user = await Users.findByPk(req.user.id);
+            const user = await Users.findByPk(req.authUser.id, {
+                attributes: {
+                    exclude: ["password"]
+                }
+            });
+            if(!user) return res.status(404).json({
+                message: "User not found"
+            });
+
             return res.status(200).json(user)
-            console.log(user)
             
         } catch (err) {
 
