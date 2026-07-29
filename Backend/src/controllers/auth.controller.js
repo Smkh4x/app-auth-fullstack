@@ -32,12 +32,7 @@ class LoginRegister {
         });
 
         } catch (err) {
-            console.log({
-                error: err.message,
-            });
-            return res.status(500).json({
-                message: err.message,
-            });
+            next(err);
         };
     };
     postLogin = async (req, res) => {
@@ -90,12 +85,7 @@ class LoginRegister {
             await user.save();
 
         } catch (err) {
-            console.log({
-                error: err.message,
-            });
-            return res.status(500).json({
-                message: err.message,
-            });
+            next(err)
         }
         
     };
@@ -114,11 +104,7 @@ class LoginRegister {
             return res.status(200).json(user)
             
         } catch (err) {
-
-            console.log({
-                error: err.message
-            })
-            
+            next(err)
         }
         
     };
