@@ -9,7 +9,7 @@ app.use(express.json());
 
 app.use("/api/auth", router);
 
-app.user(errHandler)
+app.use(errHandler)
 
 
 const main = async () => {
