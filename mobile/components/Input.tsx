@@ -9,7 +9,7 @@ type props = {
     secureTextEntry?: boolean
 }
 export default function Input({placeholder, value,secureTextEntry, onChangeText}: props) {
-  return (
+  return (  
     <View style={styles.input}>
       <TextInput
       placeholder={placeholder}
