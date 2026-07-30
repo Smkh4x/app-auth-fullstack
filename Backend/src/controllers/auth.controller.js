@@ -45,11 +45,11 @@ class LoginRegister {
                 where: {email}
             });
             if(!user) return res.status(400).json({
-                message: "The login information you entered is incorrect",
+                message: "Email ou mot de passe incorrect",
             });
             const hasAccess = await bcrypt.compare(password, user.password)
             if(!hasAccess) return res.status(400).json({
-                message: "Invalid password",
+                message: "Email ou mot de passe incorrect",
             });
             const token = jwt.sign(
                 {

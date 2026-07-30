@@ -1,15 +1,18 @@
 import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native'
 import React from 'react'
 import colors from '@/constants/colors'
+import { router } from 'expo-router'
 type props = {
-placeholder: string,
+  text: string
 }
-export default function Button({placeholder}: props) {
+export default function Button({text}: props) {
   return (
-    <TouchableOpacity style={styles.Signin}>
-      <TextInput
-      placeholder={placeholder}
-      />
+    <TouchableOpacity style={styles.Signin}
+    
+    >
+      <Text style={{color: colors.white}}>
+        {text}
+      </Text>
     </TouchableOpacity>
 
   )
@@ -17,9 +20,11 @@ export default function Button({placeholder}: props) {
 const styles = StyleSheet.create({
     Signin: {
         backgroundColor: colors.primary,
-        width: 350,
-        height: 35,
-        borderRadius: 18,
+        width: 440,
+        height: 45,
+        borderRadius: 20,
+        justifyContent: "center",
+        alignItems: "center",
 
     }
 
