@@ -1,7 +1,9 @@
 import { ImageBackground, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import colors from "@/constants/colors";
 import { router } from "expo-router";
+import register from "./(auth)/register";
 export default function Index() {
+
   return (
     <>
       <View style={styles.container}>
@@ -30,7 +32,9 @@ export default function Index() {
         <TouchableOpacity style={styles.next} 
         onPress={() => {
           router.push("/register")
+          
         }}
+        
         >
             <Text style={{
               color: colors.primary,

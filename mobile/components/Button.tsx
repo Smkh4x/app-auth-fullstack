@@ -2,13 +2,13 @@ import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-nativ
 import React from 'react'
 import colors from '@/constants/colors'
 import { router } from 'expo-router'
+import register from '@/app/(auth)/register'
 type props = {
   text: string
 }
 export default function Button({text}: props) {
   return (
     <TouchableOpacity style={styles.Signin}
-    
     >
       <Text style={{color: colors.white}}>
         {text}

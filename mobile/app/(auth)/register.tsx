@@ -44,7 +44,6 @@ export default function register() {
                     <View>
                         <Button 
                         text='Register'
-                        
                         />
                     </View>
 

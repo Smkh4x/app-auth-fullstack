@@ -3,7 +3,7 @@ from pathlib import Path
 import re
 socket_ = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 try:
-    socket_.connect(("8.8.8.8", 80))  
+    socket_.connect(("8.8.8.8", 80))
     ip = socket_.getsockname()[0]
 finally:
     socket_.close()
