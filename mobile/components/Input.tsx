@@ -1,12 +1,12 @@
-import { View, Text, StyleSheet, TextInput } from 'react-native'
+import { View, StyleSheet, TextInput } from 'react-native'
 import React from 'react'
 import colors from '@/constants/colors'
 
 type props = {
     placeholder: string,
-    value?: string,
-    onChangeText?: (text: string) => void,
-    secureTextEntry?: boolean
+    value: string,
+    onChangeText: (text: string) => void,
+    secureTextEntry: boolean
 }
 export default function Input({placeholder, value,secureTextEntry, onChangeText}: props) {
   return (  

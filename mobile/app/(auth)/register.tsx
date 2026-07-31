@@ -1,12 +1,42 @@
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
-import React from 'react'
+import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native'
+import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import colors from '@/constants/colors'
 import Input from '@/components/Input'
 import Button from '@/components/Button'
 import { router } from 'expo-router'
+import { Register } from '@/services/auth.service'
+import { push } from 'expo-router/build/global-state/routing'
+
 
 export default function register() {
+    const [userName, setuserName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const handleregister = async() => {
+        if(!userName || !email || !password){
+            Alert.alert("Please, full all information")
+            return;
+        };
+        try {
+        const response = await Register({
+            userName,
+            email,
+            password
+        });
+        console.log("res" ,response)
+        router.navigate('/login');
+        } catch (err) {
+            console.log(err)
+            Alert.alert("Error", "register faild")
+            
+        }
+
+
+            
+    }
+    
     return (
 
         <SafeAreaView style={styles.container}>
@@ -26,17 +56,24 @@ export default function register() {
                 <View style={{ gap: 12 , alignItems: "center"}}>
                     <View style={styles.inputs}>
                         <Input
-                            placeholder='fullName'
+                            placeholder='userName'
+                            value={userName}
+                            onChangeText={setuserName}
+                            secureTextEntry={false}
 
                         />
                         <Input
                             placeholder='email'
+                            value={email}
+                            onChangeText={setEmail}
+                            secureTextEntry={false}
 
                         />
                         <Input
                             placeholder='password'
                             secureTextEntry={false}
-                            
+                            value={password}
+                            onChangeText={setPassword}
                             
                         />
                     </View>
@@ -44,6 +81,7 @@ export default function register() {
                     <View>
                         <Button 
                         text='Register'
+                        onPress={handleregister}
                         />
                     </View>
 

@@ -1,12 +1,36 @@
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
-import React from 'react'
+import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native'
+import React, { useState } from 'react'
 import Button from '@/components/Button'
 import Input from '@/components/Input'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { router } from 'expo-router'
 import colors from '@/constants/colors'
+import { Login } from '@/services/auth.service'
 
 export default function login() {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const handleLogin = async () => {
+        if(!email || !password){
+            Alert.alert("please full all information");
+            return;
+        }
+        try {
+        const response = await Login({
+            email,
+            password
+        })
+        console.log(response);
+        router.navigate('/home');            
+        } catch (err) {
+            console.log({
+                "err": err
+            })
+            
+        }
+
+    }
   return (
         <SafeAreaView style={styles.container}>
             <View >
@@ -26,12 +50,16 @@ export default function login() {
                     <View style={styles.inputs}>
                         <Input
                             placeholder='email'
+                            value={email}
+                            onChangeText={setEmail}
+                            secureTextEntry={false}
 
                         />
                         <Input
                             placeholder='password'
                             secureTextEntry={true}
-                            
+                            value={password}
+                            onChangeText={setPassword}                            
 
                         />
                     </View>
@@ -39,6 +67,8 @@ export default function login() {
                     <View>
                         <Button 
                         text='login'
+                        onPress={handleLogin}
+                        
                         
                         />
                     </View>

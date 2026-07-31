@@ -4,11 +4,13 @@ import colors from '@/constants/colors'
 import { router } from 'expo-router'
 import register from '@/app/(auth)/register'
 type props = {
-  text: string
+  text: string;
+  onPress?: () => void;
 }
-export default function Button({text}: props) {
+export default function Button({text, onPress}: props) {
   return (
     <TouchableOpacity style={styles.Signin}
+    onPress={onPress}
     >
       <Text style={{color: colors.white}}>
         {text}
