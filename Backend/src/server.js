@@ -19,7 +19,7 @@ const main = async () => {
 
     await database.sync();
 
-    app.listen(3009, () =>  {
+    app.listen(3009,  () =>  {
        console.log("\t[+] Server On Port : 3009")  
     })
 

@@ -1,28 +1,26 @@
 import socket
 from pathlib import Path
 import re
-socket_ = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+
+s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+
 try:
-    socket_.connect(("8.8.8.8", 80))
-    ip = socket_.getsockname()[0]
+    s.connect(("8.8.8.8", 80))
+    ip = s.getsockname()[0]
 finally:
-    socket_.close()
+    s.close()
 
 
 path = Path("mobile") / "services" / "api.ts"
 
-with open(path, "r", encoding="utf-8") as file:
-    content = file.read()
-    new_ip = ip
+content = path.read_text(encoding="utf-8")
+
 content = re.sub(
-    r'baseURL:\s*"http://.*?:3009/api/"',
-    f'baseURL: "http://{new_ip}:3009/api/"',
+    r'baseURL:\s*"http://.*?:\d+/api"',
+    f'baseURL: "http://{ip}:3000/api"',
     content
 )
-with open(path, "w", encoding="utf-8") as file:
-    file.write(content)
-    print("change ip successfully")
 
+path.write_text(content, encoding="utf-8")
 
-
-
+print(f"IP changed successfully: {ip}")
