@@ -10,6 +10,7 @@ import { Login } from '@/services/auth.service'
 export default function login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [isLoading, setIsLoading] = useState(false)
 
     const handleLogin = async () => {
         if(!email || !password){
@@ -17,6 +18,7 @@ export default function login() {
             return;
         }
         try {
+            setIsLoading(true)
         const response = await Login({
             email,
             password
@@ -28,6 +30,8 @@ export default function login() {
                 "err": err
             })
             
+        }finally {
+            setIsLoading(false)
         }
 
     }
@@ -68,7 +72,8 @@ export default function login() {
                         <Button 
                         text='login'
                         onPress={handleLogin}
-                        
+                        isLoading={isLoading}
+                                              
                         
                         />
                     </View>
@@ -86,7 +91,7 @@ export default function login() {
 
         </SafeAreaView>
   )
-};
+}
 const styles = StyleSheet.create({
     container: {
         flex: 1,

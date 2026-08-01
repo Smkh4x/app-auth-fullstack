@@ -10,14 +10,13 @@ try:
 finally:
     s.close()
 
-
 path = Path("mobile") / "services" / "api.ts"
 
 content = path.read_text(encoding="utf-8")
 
 content = re.sub(
     r'baseURL:\s*"http://.*?:\d+/api"',
-    f'baseURL: "http://{ip}:3000/api"',
+    f'baseURL: "http://{ip}:3009/api"',
     content
 )
 

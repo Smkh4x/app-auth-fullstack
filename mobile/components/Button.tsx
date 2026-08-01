@@ -1,21 +1,30 @@
-import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native'
-import React from 'react'
+import {  Text, StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native'
+import React, { useState } from 'react'
 import colors from '@/constants/colors'
-import { router } from 'expo-router'
-import register from '@/app/(auth)/register'
 type props = {
   text: string;
+  isLoading?: boolean;
   onPress?: () => void;
 }
-export default function Button({text, onPress}: props) {
+export default function Button({text, onPress, isLoading}: props) {
+  
   return (
     <TouchableOpacity style={styles.Signin}
     onPress={onPress}
+    disabled={isLoading}
+    
     >
+      {isLoading? (<ActivityIndicator color="white" /> ): (
       <Text style={{color: colors.white}}>
         {text}
       </Text>
+      
+    )}
+    
+      
+
     </TouchableOpacity>
+
 
   )
 };

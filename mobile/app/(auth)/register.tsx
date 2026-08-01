@@ -6,20 +6,23 @@ import Input from '@/components/Input'
 import Button from '@/components/Button'
 import { router } from 'expo-router'
 import { Register } from '@/services/auth.service'
-import { push } from 'expo-router/build/global-state/routing'
+
 
 
 export default function register() {
     const [userName, setuserName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState("");
 
     const handleregister = async() => {
         if(!userName || !email || !password){
-            Alert.alert("Please, full all information")
+            setError("Please fill all fields")
             return;
         };
         try {
+            setIsLoading(true)
         const response = await Register({
             userName,
             email,
@@ -27,22 +30,19 @@ export default function register() {
         });
         console.log("res" ,response)
         router.navigate('/login');
-        } catch (err) {
-            console.log(err)
-            Alert.alert("Error", "register faild")
-            
-        }
 
+        } catch (err:any) {
+            setError(err.response?.data?.error)     
+        } finally {
+            setIsLoading(false) 
 
-            
+        }       
     }
     
     return (
 
         <SafeAreaView style={styles.container}>
             <View >
-
-
                 <View style={styles.textForum}>
                     <View>
                         <Text style={styles.text1}>Create new account</Text>
@@ -60,6 +60,8 @@ export default function register() {
                             value={userName}
                             onChangeText={setuserName}
                             secureTextEntry={false}
+                            error={error}
+                            
 
                         />
                         <Input
@@ -67,6 +69,7 @@ export default function register() {
                             value={email}
                             onChangeText={setEmail}
                             secureTextEntry={false}
+                            error={error}
 
                         />
                         <Input
@@ -74,6 +77,7 @@ export default function register() {
                             secureTextEntry={false}
                             value={password}
                             onChangeText={setPassword}
+                            error={error}
                             
                         />
                     </View>
@@ -82,7 +86,10 @@ export default function register() {
                         <Button 
                         text='Register'
                         onPress={handleregister}
+                        isLoading={isLoading}
+                        
                         />
+                        
                     </View>
 
                     <View style={styles.text3}>

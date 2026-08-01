@@ -3,7 +3,7 @@ const validate = (schema) => {
         const result = schema.safeParse(req.body);
 
         if(!result.success) return res.status(400).json({
-            error: result.error.message,
+            error: result.error.issues[0].message
         });
 
         req.body = result.data;
