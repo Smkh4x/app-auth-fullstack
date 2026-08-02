@@ -3,7 +3,7 @@ import bcrypt, { compare } from "bcrypt";
 import jwt from "jsonwebtoken"
 
 class LoginRegister {
-    postRegister = async (req, res) => {
+    postRegister = async (req, res, next) => {
         try {
         const {
             userName,
@@ -35,7 +35,7 @@ class LoginRegister {
             next(err);
         };
     };
-    postLogin = async (req, res) => {
+    postLogin = async (req, res, next) => {
         try {
             const {
                 email,
@@ -45,11 +45,11 @@ class LoginRegister {
                 where: {email}
             });
             if(!user) return res.status(400).json({
-                message: "Email ou mot de passe incorrect",
+                error: "Email ou mot de passe incorrect",
             });
             const hasAccess = await bcrypt.compare(password, user.password)
             if(!hasAccess) return res.status(400).json({
-                message: "Email ou mot de passe incorrect",
+                error: "Email ou mot de passe incorrect",
             });
             const token = jwt.sign(
                 {
@@ -89,7 +89,7 @@ class LoginRegister {
         }
         
     };
-    getMe = async (req, res) => {
+    getMe = async (req, res, next) => {
 
         try {
             const user = await Users.findByPk(req.authUser.id, {
