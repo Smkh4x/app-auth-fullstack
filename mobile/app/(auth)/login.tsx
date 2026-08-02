@@ -5,7 +5,7 @@ import Input from '@/components/Input'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { router } from 'expo-router'
 import colors from '@/constants/colors'
-import { Login } from '@/services/auth.service'
+import { useAuthStore } from "@/store/auth.store"
 
 export default function login() {
     const [email, setEmail] = useState("");
@@ -17,6 +17,7 @@ export default function login() {
         email: "",
         password: ""
     });
+    const { login } = useAuthStore();
 
     const handleLogin = async () => {
         if(!email){
@@ -32,12 +33,9 @@ export default function login() {
         }
         try {
             setIsLoading(true)
-        const response = await Login({
-            email,
-            password
-        })
-        console.log(response);
-        router.navigate('/home');            
+            await login(email, password)
+        //console.log(response);
+        router.replace('/home');            
         } catch (err: any) {
             setServerError(err.response?.data?.error)
             console.log(err.response.data.error)

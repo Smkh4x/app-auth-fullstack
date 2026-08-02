@@ -3,16 +3,40 @@ import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import colors from '@/constants/colors';
 import { LogOut } from 'lucide-react-native';
+import { useAuthStore } from "@/store/auth.store"
+import { router } from 'expo-router';
+import * as SecureStore from "expo-secure-store";
 
 export default function home() {
+
+  const checkToken = async () => {
+    const token = await SecureStore.getItemAsync("token");
+    console.log("secure token :",token)
+  }
+  checkToken();
+
+  const {user, token, isAuthenticated, logout} = useAuthStore();
+
+  console.log("USER", user);
+  console.log("TOKEN", token);
+  console.log("isAuthenticated", isAuthenticated);
+
+  const handleLogout = async () => {
+    await logout();
+    router.replace("/login");
+  }
   return (
     <SafeAreaView style={styles.grandView}>
 
-        <TouchableOpacity style={styles.container}>
+        <TouchableOpacity 
+        style={styles.container}
+        onPress={handleLogout}
+        
+        >
             <LogOut color={colors.white}/>       
         </TouchableOpacity>
         <View style={styles.textMov}>
-            <Text style={styles.text}>Marhba, youssef</Text>          
+            <Text style={styles.text}>Marhba, {user?.userName} 👋</Text>                                                                 
         </View>
         
     </SafeAreaView>

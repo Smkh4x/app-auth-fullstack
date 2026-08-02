@@ -12,6 +12,7 @@ finally:
 
 path = Path("mobile") / "services" / "api.ts"
 
+
 content = path.read_text(encoding="utf-8")
 
 content = re.sub(

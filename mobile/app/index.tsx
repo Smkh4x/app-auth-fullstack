@@ -1,8 +1,16 @@
 import { ImageBackground, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import colors from "@/constants/colors";
-import { router } from "expo-router";
-import register from "./(auth)/register";
+import { router } from "expo-router";;
+import { Redirect } from "expo-router";
+import useAuthStore from "@/store/auth.store";
+
 export default function Index() {
+  const { isAuthenticated } = useAuthStore();
+
+  if(isAuthenticated){
+    return <Redirect href="/home" />;
+}
+
 
   return (
     <>
@@ -31,7 +39,7 @@ export default function Index() {
         </View>
         <TouchableOpacity style={styles.next} 
         onPress={() => {
-          router.push("/register")
+          router.replace("/login")
           
         }}
         

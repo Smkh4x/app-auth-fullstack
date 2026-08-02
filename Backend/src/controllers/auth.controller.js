@@ -11,12 +11,12 @@ class LoginRegister {
             password
         } = req.body;
 
-        const exist = await Users.findOne({
+        const user = await Users.findOne({
             where: { email },
         });
 
-        if(exist) return res.status(400).json({
-            message: "This email already exits",
+        if(user) return res.status(400).json({
+            error: "This email already exits",
         });
 
         const hash = await bcrypt.hash(password, 10);
@@ -29,6 +29,7 @@ class LoginRegister {
 
         return res.status(201).json({
             message: "created succesfully.",
+            
         });
 
         } catch (err) {
@@ -67,22 +68,16 @@ class LoginRegister {
             )
             console.log("=> DECODE TOKEN : ",decode);
 
-            const refreshToken = jwt.sign(
-                {
-                    id: user.id
-                },
-                process.env.JWT_SECRET_REFRESH_TOKEN,
-                {
-                expiresIn: process.env.JWT_EXPIRES_REFRESH_TOKEN_IN,
-                },
-            );
 
             return res.status(200).json({
                 message: "login succesfully",
-                "acces Token": token,
-                "refresh Token": refreshToken
+                accesToken: token,
+                user: {
+                    id: user.id,
+                    email: user.email,
+                    userName: user.userName,
+                }
             });
-            await user.save();
 
         } catch (err) {
             next(err)

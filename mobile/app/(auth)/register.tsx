@@ -49,7 +49,7 @@ export default function register() {
                 password
             });
             console.log("res", response)
-            router.navigate('/login');
+            router.replace('/login');
 
         } catch (err: any) {
             setServerError(err.response?.data?.error)
