@@ -20,7 +20,7 @@ export const Login = async(data:loginData) => {
     return res.data
 
 }
-export const me = async() => {
+export const Me = async() => {
     const res = await api.get("/auth/me");
     console.log(res);
     return res.data
