@@ -7,9 +7,10 @@ type props = {
   value: string,
   onChangeText: (text: string) => void,
   secureTextEntry: boolean,
-  error?: string
+  error?: string,
+
 }
-export default function Input({ placeholder, value, secureTextEntry, onChangeText, error }: props) {
+export default function Input({ placeholder, value, secureTextEntry, onChangeText, error,  }: props) {
   return (
     <View>
       <View

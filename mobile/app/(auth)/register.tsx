@@ -14,31 +14,51 @@ export default function register() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState("");
+    const [serverError, setServerError] = useState("");
+    const [errors, setErrors] = useState({
+        userName: "",
+        email: "",
+        password: ""
+    });
 
-    const handleregister = async() => {
-        if(!userName || !email || !password){
-            setError("Please fill all fields")
+    const handleregister = async () => {
+        if (!userName) {
+            setErrors(prev => ({
+                ...prev,
+                userName: "username mkinx"
+            }))
             return;
-        };
+        } else if (!email) {
+            setErrors(prev => ({
+                ...prev,
+                email: "email mkinx"
+            }))
+            return;
+        }else if(!password){
+            setErrors(prev => ({
+                ...prev,
+                password: "password mkinx"
+            }))
+            return;
+        }
         try {
             setIsLoading(true)
-        const response = await Register({
-            userName,
-            email,
-            password
-        });
-        console.log("res" ,response)
-        router.navigate('/login');
+            const response = await Register({
+                userName,
+                email,
+                password
+            });
+            console.log("res", response)
+            router.navigate('/login');
 
-        } catch (err:any) {
-            setError(err.response?.data?.error)     
+        } catch (err: any) {
+            setServerError(err.response?.data?.error)
         } finally {
-            setIsLoading(false) 
+            setIsLoading(false)
 
-        }       
+        }
     }
-    
+
     return (
 
         <SafeAreaView style={styles.container}>
@@ -52,50 +72,70 @@ export default function register() {
                     </View>
                 </View>
 
-
-                <View style={{ gap: 12 , alignItems: "center"}}>
+                <View style={{ gap: 12, alignItems: "center" }}>
                     <View style={styles.inputs}>
                         <Input
                             placeholder='userName'
                             value={userName}
-                            onChangeText={setuserName}
+                            onChangeText={(text) => {
+                                setuserName(text);
+                                setErrors(prev => ({
+                                    ...prev,
+                                    userName: ""
+                                }))
+                            }}
                             secureTextEntry={false}
-                            error={error}
-                            
+                            error={errors.userName}
 
                         />
                         <Input
                             placeholder='email'
                             value={email}
-                            onChangeText={setEmail}
+                            onChangeText={(text) => {
+                                setEmail(text);
+                                setErrors(prev => ({
+                                    ...prev,
+                                    email: ""
+                                }))                          
+                            }}
                             secureTextEntry={false}
-                            error={error}
+                            error={errors.email}
+
 
                         />
                         <Input
                             placeholder='password'
                             secureTextEntry={false}
                             value={password}
-                            onChangeText={setPassword}
-                            error={error}
-                            
+                            onChangeText={(text) => {
+                                setPassword(text);
+                                setErrors(prev => ({
+                                    ...prev,
+                                    password: ""
+                                }))
+                            }}
+                            error={errors.password}
+
+
                         />
                     </View>
 
+                    <Text style={{color: colors.error}}>{serverError}</Text>
+
                     <View>
-                        <Button 
-                        text='Register'
-                        onPress={handleregister}
-                        isLoading={isLoading}
-                        
+                        <Button
+                            text='Register'
+                            onPress={handleregister}
+                            isLoading={isLoading}
+
                         />
-                        
+
                     </View>
 
                     <View style={styles.text3}>
                         <Text>Already have an account ? </Text>
                         <TouchableOpacity onPress={() => { router.push('/login') }}>
-                            <Text style={{ color: colors.primary, textDecorationLine: "underline"}}>login here</Text>
+                            <Text style={{ color: colors.primary, textDecorationLine: "underline" }}>login here</Text>
                         </TouchableOpacity>
                     </View>
 
@@ -113,8 +153,8 @@ const styles = StyleSheet.create({
         paddingHorizontal: 24,
         alignItems: "center",
         paddingTop: 120
-        
-        
+
+
     },
     textForum: {
         alignItems: 'center',

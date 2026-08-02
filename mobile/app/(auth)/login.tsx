@@ -12,10 +12,23 @@ export default function login() {
     const [password, setPassword] = useState("");
     const [isLoading, setIsLoading] = useState(false)
 
+    const [serverError, setServerError] = useState("")
+    const [errors, setErrors] = useState({
+        email: "",
+        password: ""
+    });
+
     const handleLogin = async () => {
-        if(!email || !password){
-            Alert.alert("please full all information");
-            return;
+        if(!email){
+            setErrors(prev => ({
+                ...prev,
+                email: "emial mkinc"
+            }))
+        } else if (!password){
+            setErrors(prev => ({
+                ...prev,
+                password: "password mkinx"
+            }))
         }
         try {
             setIsLoading(true)
@@ -25,10 +38,9 @@ export default function login() {
         })
         console.log(response);
         router.navigate('/home');            
-        } catch (err) {
-            console.log({
-                "err": err
-            })
+        } catch (err: any) {
+            setServerError(err.response?.data?.error)
+            console.log(err.response.data.error)
             
         }finally {
             setIsLoading(false)
@@ -39,7 +51,6 @@ export default function login() {
         <SafeAreaView style={styles.container}>
             <View >
 
-
                 <View style={styles.textForum}>
                     <View>
                         <Text style={styles.text1}>Welcome Back</Text>
@@ -49,34 +60,47 @@ export default function login() {
                     </View>
                 </View>
 
-
                 <View style={{ gap: 12 , alignItems: "center"}}>
                     <View style={styles.inputs}>
                         <Input
                             placeholder='email'
                             value={email}
-                            onChangeText={setEmail}
+                            onChangeText={(text) => {
+                                setEmail(text);
+                                setErrors(prev => ({
+                                    ...prev,
+                                    email: ""
+                                }))
+                            }}
                             secureTextEntry={false}
+                            error={errors.email}
 
                         />
                         <Input
                             placeholder='password'
                             secureTextEntry={true}
                             value={password}
-                            onChangeText={setPassword}                            
+                            onChangeText={(text) => {
+                                setPassword(text)
+                                setErrors(prev => ({
+                                    ...prev,
+                                    password: ""
+                                }))
+                            }}   
+                            error={errors.password}                         
 
                         />
                     </View>
-
+                    <Text style={{color: colors.error}}>{serverError}</Text>
                     <View>
                         <Button 
                         text='login'
                         onPress={handleLogin}
                         isLoading={isLoading}
-                                              
                         
                         />
                     </View>
+
 
                     <View style={styles.text3}>
                         <Text>No account yet ? </Text>
