@@ -120,9 +120,9 @@ export default function register() {
                         />
                     </View>
 
-                    <Text style={{color: colors.error}}>{serverError}</Text>
+                    <Text style={{color: colors.error,  width: "100%",}}>{serverError}</Text>
 
-                    <View>
+                    <View  style={{ width: "100%" }}>
                         <Button
                             text='Register'
                             onPress={handleregister}
@@ -151,9 +151,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         paddingHorizontal: 24,
-        alignItems: "center",
-        paddingTop: 120
-
+        paddingTop: 120,
 
     },
     textForum: {
@@ -176,7 +174,8 @@ const styles = StyleSheet.create({
 
     },
     inputs: {
-        gap: 12
+        gap: 12,
+         width: "100%",
     }
 
 })

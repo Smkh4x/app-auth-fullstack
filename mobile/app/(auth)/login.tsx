@@ -47,8 +47,7 @@ export default function login() {
     }
   return (
         <SafeAreaView style={styles.container}>
-            <View >
-
+            <View  style={{ width: "100%" ,}}>
                 <View style={styles.textForum}>
                     <View>
                         <Text style={styles.text1}>Welcome Back</Text>
@@ -90,7 +89,7 @@ export default function login() {
                         />
                     </View>
                     <Text style={{color: colors.error}}>{serverError}</Text>
-                    <View>
+                    <View  style={{ width: "100%" }}>
                         <Button 
                         text='login'
                         onPress={handleLogin}
@@ -119,9 +118,9 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingHorizontal: 24,
         alignItems: "center",
-        paddingTop: 120
+        paddingTop: 120,
         
-        
+             
     },
     textForum: {
         alignItems: 'center',
@@ -132,7 +131,6 @@ const styles = StyleSheet.create({
         fontSize: 30,
         fontWeight: "bold",
         color: colors.primary
-
     },
     text2: {
         fontSize: 16
@@ -140,10 +138,10 @@ const styles = StyleSheet.create({
     text3: {
         flexDirection: "row",
         alignItems: "center"
-
     },
     inputs: {
-        gap: 12
+        gap: 12,
+        width: "100%",
     }
 
 })

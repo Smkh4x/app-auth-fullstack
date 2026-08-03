@@ -31,7 +31,7 @@ export default function Button({text, onPress, isLoading}: props) {
 const styles = StyleSheet.create({
     Signin: {
         backgroundColor: colors.primary,
-        width: 440,
+        width: "100%",
         height: 45,
         borderRadius: 20,
         justifyContent: "center",

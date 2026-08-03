@@ -2,6 +2,7 @@ import { View, StyleSheet, TextInput, Text } from 'react-native'
 import React from 'react'
 import colors from '@/constants/colors'
 
+
 type props = {
   placeholder: string,
   value: string,
@@ -24,6 +25,7 @@ export default function Input({ placeholder, value, secureTextEntry, onChangeTex
           value={value}
           secureTextEntry={secureTextEntry}
           onChangeText={onChangeText}
+          
         />
 
       </View>
@@ -43,7 +45,7 @@ export default function Input({ placeholder, value, secureTextEntry, onChangeTex
 const styles = StyleSheet.create({
   input: {
     backgroundColor: colors.inputBg,
-    width: 440,
+    width: "100%",
     height: 60,
     borderRadius: 15,
     justifyContent: "center",
@@ -51,7 +53,7 @@ const styles = StyleSheet.create({
   },
   inputError: {
     backgroundColor: colors.inputBg,
-    width: 440,
+    width: "100%",
     height: 60,
     borderRadius: 15,
     justifyContent: "center",
