@@ -23,22 +23,25 @@ export default function login() {
         if(!email){
             setErrors(prev => ({
                 ...prev,
-                email: "emial mkinc"
+                email: "Email not found."
             }))
         } else if (!password){
             setErrors(prev => ({
                 ...prev,
-                password: "password mkinx"
+                password: "password not found."
             }))
         }
         try {
+
             setIsLoading(true)
+
             await login(email, password)
-        //console.log(response);
-        router.replace('/home');            
+            
+        router.replace('/home');
+
         } catch (err: any) {
             setServerError(err.response?.data?.error)
-            console.log(err.response.data.error)
+            console.log("We have a error in : ", err.response.data.error)
             
         }finally {
             setIsLoading(false)

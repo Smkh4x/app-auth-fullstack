@@ -1,5 +1,4 @@
 import {  Text, StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native'
-import React, { useState } from 'react'
 import colors from '@/constants/colors'
 type props = {
   text: string;
@@ -14,9 +13,9 @@ export default function Button({text, onPress, isLoading}: props) {
     disabled={isLoading}
     
     >
-      {isLoading? (<ActivityIndicator color="white" /> ): (
-      <Text style={{color: colors.white}}>
-        {text}
+      {isLoading? (<ActivityIndicator color="white" /> ): ( // this is a cercle in login / register [if isloading ]
+      <Text style={{color: colors.white}}> 
+        {text} 
       </Text>
       
     )}
@@ -36,6 +35,7 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         justifyContent: "center",
         alignItems: "center",
+        color: colors.white
 
     }
 
