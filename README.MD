@@ -13,6 +13,9 @@ Le projet met en pratique un circuit complet d'authentification :
 * Persistance de session avec Expo SecureStore
 
 ---
+<p align="center">
+  <img src="./image/login-register.png" alt="App Preview" width="100%">
+</p>
 
 #  Architecture du projet
 
