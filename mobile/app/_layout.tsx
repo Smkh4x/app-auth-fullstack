@@ -7,6 +7,9 @@ import { ActivityIndicator } from "react-native";
 export default function RootLayout() {
   const {restoreSession, isLoading, isAuthenticated} = useAuthStore();
 
+    // isAuthenticated: false,
+    // isLoading: true,
+
   useEffect(() => {
     restoreSession();
   },[])

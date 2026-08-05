@@ -11,7 +11,7 @@ export default function home() {
 
   const checkToken = async () => {
     const token = await SecureStore.getItemAsync("token");
-    console.log("secure token :",token)
+    console.log("secure token :", token)
   }
   checkToken();
 

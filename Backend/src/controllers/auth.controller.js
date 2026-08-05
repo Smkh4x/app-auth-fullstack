@@ -52,6 +52,7 @@ class LoginRegister {
             if(!hasAccess) return res.status(400).json({
                 error: "Email ou mot de passe incorrect",
             });
+            
             const token = jwt.sign(
                 {
                     id: user.id

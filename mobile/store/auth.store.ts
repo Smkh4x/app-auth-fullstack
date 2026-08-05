@@ -30,6 +30,7 @@ type AuthStore ={
     restoreSession(): Promise<void>
 }
 export const useAuthStore = create<AuthStore>((set) => ({
+    
     user: null,
     token: null,
     isAuthenticated: false,
